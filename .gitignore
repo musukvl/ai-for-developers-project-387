@@ -1,0 +1,26 @@
+node_modules/
+.env
+.DS_Store
+.idea/
+.nvm
+
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Build output
+dist/
+frontend/dist/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.jsonl
+
+# Playwright
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
