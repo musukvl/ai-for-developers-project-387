@@ -9,7 +9,7 @@ class TestHealth:
     def test_reports_ok_and_configured_seed_file(self, client, make_app):
         app = make_app("empty.yml")
         c = app.test_client()
-        response = c.get("/api/health")
+        response = c.get("/api/health/ready")
         assert response.status_code == 200
         body = response.get_json()
         assert body["status"] == "ok"
@@ -17,7 +17,7 @@ class TestHealth:
 
     def test_no_header_required(self, client):
         c = client("empty.yml")
-        response = c.get("/api/health")
+        response = c.get("/api/health/ready")
         assert response.status_code == 200
 
 
