@@ -11,9 +11,9 @@ const { isSignedIn, userName } = useUserName();
 
 <template>
   <div class="min-h-screen bg-slate-50 text-slate-900">
-    <header class="border-b border-slate-200 bg-white">
+    <header class="border-b border-slate-200 app-header-strong">
       <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
-        <RouterLink to="/" class="text-lg font-semibold text-slate-900">Calls Calendar</RouterLink>
+        <RouterLink to="/" class="text-lg font-semibold">Calls Calendar</RouterLink>
         <span v-if="isSignedIn" class="text-sm text-slate-500">Signed in as {{ userName }}</span>
       </div>
     </header>
