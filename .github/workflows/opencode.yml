@@ -28,6 +28,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           persist-credentials: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -45,7 +46,7 @@ jobs:
           model: openai/gpt-5-mini
           use_github_token: true
           prompt: |
-            Follow Conventional Commits (https://www.conventionalcommits.org/) for every git commit message and pull request title.
+            Follow Conventional Commits (https://www.conventionalcommits.org/) for every new git commit message and pull request title.
 
             Rules:
             - Use `<type>(<optional scope>): <description>`
@@ -53,6 +54,11 @@ jobs:
             - Description is a short imperative phrase with no trailing period
             - Keep the subject under 72 characters
             - If asked to summarize changes for a commit, still use Conventional Commits, for example `fix: add header brand color`
+
+            When working on an existing pull request branch:
+            - Do not amend, rebase, or rewrite commits that already exist on the remote
+            - Add a new commit instead of changing published history
+            - Never force-push
 
             User request:
             ${{ github.event.comment.body }}
