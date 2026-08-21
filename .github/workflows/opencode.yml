@@ -19,11 +19,21 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+    env:
+      GIT_AUTHOR_NAME: OpenCode Agent
+      GIT_AUTHOR_EMAIL: agent@opencode.com
+      GIT_COMMITTER_NAME: OpenCode Agent
+      GIT_COMMITTER_EMAIL: agent@opencode.com
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           persist-credentials: false
+
+      - name: Configure git author
+        run: |
+          git config --global user.name "OpenCode Agent"
+          git config --global user.email "agent@opencode.com"
 
       - name: Run opencode
         uses: anomalyco/opencode/github@latest
