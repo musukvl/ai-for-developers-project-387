@@ -28,3 +28,6 @@ __plans/
 __tasks/
 __reports/
 __scripts/
+
+# Lighthouse CI (HTML/JSON from a run; the morning briefing is committed)
+.lighthouseci/

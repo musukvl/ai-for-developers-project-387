@@ -1,0 +1,110 @@
+name: Scheduled OpenCode Task
+
+on:
+  schedule:
+    # 00:00 UTC+3 so the report is ready for the morning review.
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+
+jobs:
+  opencode:
+    name: Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GIT_AUTHOR_NAME: OpenCode Agent
+      GIT_AUTHOR_EMAIL: agent@opencode.com
+      GIT_COMMITTER_NAME: OpenCode Agent
+      GIT_COMMITTER_EMAIL: agent@opencode.com
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git author
+        run: |
+          git config --global user.name "OpenCode Agent"
+          git config --global user.email "agent@opencode.com"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install and build frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.15.x
+          lhci autorun
+        continue-on-error: true
+
+      - name: Write morning summary
+        if: always()
+        run: node .github/scripts/lighthouse-summary.mjs
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-morning-report
+          path: |
+            .lighthouseci/
+            reports/lighthouse-latest.md
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Review report with OpenCode
+        if: always()
+        uses: anomalyco/opencode/github@latest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          model: openai/gpt-5-mini
+          use_github_token: true
+          prompt: |
+            Follow Conventional Commits (https://www.conventionalcommits.org/) for every new git commit message and pull request title.
+
+            Rules:
+            - Use `<type>(<optional scope>): <description>`
+            - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+            - Description is a short imperative phrase with no trailing period
+            - Keep the subject under 72 characters
+            - If asked to summarize changes for a commit, still use Conventional Commits, for example `fix: add header brand color`
+
+            When working on an existing pull request branch:
+            - Do not amend, rebase, or rewrite commits that already exist on the remote
+            - Add a new commit instead of changing published history
+            - Never force-push
+
+            You are running the nightly Lighthouse review for this Calls Calendar app.
+
+            Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Do the following:
+            1. Read `reports/lighthouse-latest.md` and the JSON/HTML files in `.lighthouseci/` if they exist.
+            2. Summarize category scores (Performance, Accessibility, Best Practices, SEO) and the audits that failed or scored poorly.
+            3. Open or update a single GitHub issue titled `Lighthouse morning report`.
+            4. In that issue, list the concrete project fixes the team should consider, ordered by impact. Tie each item to an audit. Do not implement the fixes; the team reviews the report in the morning and decides.
+            5. Include links to this workflow run and to the `lighthouse-morning-report` artifact so the HTML report can be downloaded.
+            6. If `reports/lighthouse-fixes.md` exists, keep it aligned with the latest recommended fixes, then commit that file only if it actually changed.
+            7. If Lighthouse did not produce a report, say so in the issue and include any error output you can find.
+
+            Do not open a pull request unless you only need to record the written summary.
