@@ -18,7 +18,7 @@ The team reviews the morning report and decides which of these to apply.
 1. **Add a favicon** (Best Practices / Console errors)
    - Audit: "Browser errors were logged to the console" — the browser requested `/favicon.ico` and received 404
    - Why: Removes console noise, fixes the Best Practices console error, and prevents confusing 404s in logs
-   - How: Add a `favicon.ico` to `frontend/public` or link a PNG/SVG favicon from `frontend/index.html`
+   - How: Add a `favicon.ico` to `frontend/public` or link a PNG/SVG favicon from `frontend/index.html`. See GitHub issue #9 (Lighthouse morning report) for the latest run and artifact
 
 2. **Fix header brand link color contrast** (Accessibility / Color contrast)
    - Audit: "Background and foreground colors do not have a sufficient contrast ratio"
@@ -43,4 +43,4 @@ The team reviews the morning report and decides which of these to apply.
 
 ## Review note
 
-These items remain optional until the team reviews the morning report and decides which to apply. Do not implement product or UI fixes without team approval.
+These items remain optional until the team reviews the morning report and decides which to apply. Do not implement product or UI fixes without team approval. Open GitHub issue #9 (Lighthouse morning report) to view the latest run and download the HTML/JSON artifact.
