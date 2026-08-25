@@ -8,14 +8,19 @@ on:
 
 jobs:
   opencode:
+    # Run only on /oc or /opencode from a human. Skip ordinary comments,
+    # bot replies, and github-actions[bot] so the agent cannot re-trigger itself.
     if: |
-      contains(github.event.comment.body, ' /oc') ||
-      startsWith(github.event.comment.body, '/oc') ||
-      contains(github.event.comment.body, ' /opencode') ||
-      startsWith(github.event.comment.body, '/opencode')
+      github.event.comment.user.type != 'Bot' &&
+      github.actor != 'github-actions[bot]' &&
+      (
+        contains(github.event.comment.body, ' /oc') ||
+        startsWith(github.event.comment.body, '/oc') ||
+        contains(github.event.comment.body, ' /opencode') ||
+        startsWith(github.event.comment.body, '/opencode')
+      )
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: write
       pull-requests: write
       issues: write

@@ -7,9 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: write
-  pull-requests: write
   issues: write
   actions: read
 
@@ -107,4 +105,5 @@ jobs:
             6. If `reports/lighthouse-fixes.md` exists, keep it aligned with the latest recommended fixes, then commit that file only if it actually changed.
             7. If Lighthouse did not produce a report, say so in the issue and include any error output you can find.
 
-            Do not open a pull request unless you only need to record the written summary.
+            Do not open a pull request.
+            Do not mention `/oc` or `/opencode` in comments, commits, or issue text.
