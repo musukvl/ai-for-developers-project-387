@@ -13,6 +13,14 @@ Look at runs in the Actions tab:
 
 The comment agent uses `openai/gpt-5-mini`. The scheduled job writes `reports/lighthouse-latest.md` and uploads the `lighthouse-morning-report` artifact.
 
+The [OpenCode GitHub App](https://github.com/apps/opencode-agent) is installed on this repository. Provider auth is `OPENAI_API_KEY`. Workflows also keep `id-token: write` for the app OIDC path; comment and scheduled jobs use `GITHUB_TOKEN` (`use_github_token: true`) so the agent can push branches and open PRs.
+
+**Security and cost**
+
+- Event filter: only comments that contain `/oc` or `/opencode` start the agent. Ordinary comments do not.
+- Loop protection: bot authors (`user.type == Bot`, including `github-actions[bot]`) are skipped. The scheduled prompt must not mention `/oc` / `/opencode`.
+- Cost: cheaper `gpt-5-mini`, one nightly Lighthouse run at 00:00 UTC+3, 20-minute timeout, artifacts kept 14 days.
+
 ### Healthcheck guide
 
 The backend exposes health endpoints that can be used for liveness and readiness probes.
