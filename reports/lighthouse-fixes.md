@@ -40,3 +40,7 @@ The team reviews the morning report and decides which of these to apply.
 - Render-blocking CSS on `/assets/index-*.css` (~4 KiB). Performance is already 100; consider this low priority.
 - Max Potential First Input Delay was flagged by Lighthouse (investigate any long main-thread tasks). This is currently low priority given overall Performance is 100.
 - Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
+
+## Review note
+
+These items remain optional until the team reviews the morning report and decides which to apply. Do not implement product or UI fixes without team approval.
