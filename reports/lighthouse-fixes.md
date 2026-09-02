@@ -1,10 +1,10 @@
 # Lighthouse fixes to consider
 
-Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-08-25.
+Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-09-02.
 
 | Category | Score |
 | --- | --- |
-| Performance | 100 |
+| Performance | 94 |
 | Accessibility | 94 |
 | Best Practices | 96 |
 | SEO | 90 |
@@ -21,6 +21,6 @@ The team reviews the morning report and decides which of these to apply.
 
 ## Skip for now
 
-- Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Performance is already 100.
-- First Contentful Paint and Max Potential FID are 99/98. Not worth a change.
-- Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
+-- Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Small impact but worth tracking; not urgent.
+-- First Contentful Paint and Max Potential FID are high (99/98). Low priority.
+-- Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
