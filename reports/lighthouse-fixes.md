@@ -22,5 +22,6 @@ The team reviews the morning report and decides which of these to apply.
 ## Skip for now
 
 - Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Performance is already 100.
+ - Render-blocking CSS on `/assets/index-BDgfnwIW.css`. Performance is already 100.
 - First Contentful Paint and Max Potential FID are 99/98. Not worth a change.
 - Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
