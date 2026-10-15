@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/musukvl/ai-for-developers-project-387/compare/calls-calendar-v0.1.1...calls-calendar-v0.2.0) (2026-08-25)
+
+
+### Features
+
+* **lighthouse:** add Lighthouse CI integration and reporting ([90616a3](https://github.com/musukvl/ai-for-developers-project-387/commit/90616a34d8e5036bcddc95859327904173397f6e))
+
 ## [0.1.1](https://github.com/musukvl/ai-for-developers-project-387/compare/calls-calendar-v0.1.0...calls-calendar-v0.1.1) (2026-08-21)
 
 
