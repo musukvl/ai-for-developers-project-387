@@ -1,6 +1,6 @@
 # Lighthouse fixes to consider
 
-Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-08-25.
+Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-10-17.
 
 | Category | Score |
 | --- | --- |
