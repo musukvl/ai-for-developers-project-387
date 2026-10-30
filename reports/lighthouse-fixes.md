@@ -1,6 +1,6 @@
 # Lighthouse fixes to consider
 
-Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-08-25.
+Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-10-30.
 
 | Category | Score |
 | --- | --- |
@@ -21,6 +21,6 @@ The team reviews the morning report and decides which of these to apply.
 
 ## Skip for now
 
-- Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Performance is already 100.
-- First Contentful Paint and Max Potential FID are 99/98. Not worth a change.
-- Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
+-- Render-blocking CSS on `/assets/index-*.css` (~4 KiB). Lighthouse flagged `Eliminate render-blocking resources` (score ~50) but overall Performance remains 100, so this is low priority.
+-- Max Potential First Input Delay reported as 82. Because Performance is 100 and user-visible interaction latency is low in practice, this is currently low priority.
+-- Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
