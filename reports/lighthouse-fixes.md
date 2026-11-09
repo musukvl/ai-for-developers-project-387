@@ -15,9 +15,10 @@ The team reviews the morning report and decides which of these to apply.
 
 ## Do next
 
-1. **Fix header link contrast.** Accessibility is 94 because the "Calls Calendar" header link uses the global `a` color (`--brand-500` / `#0ea5e9`) on `.app-header-strong` (`--brand-600` / `#0284c7`). Contrast is 1.47:1; Lighthouse requires 4.5:1. Make the header brand link white (or another color that meets 4.5:1 on the header).
-2. **Add a favicon.** Best Practices drops because the browser requests `/favicon.ico` and gets 404, which Lighthouse records as a console error. Add `frontend/public/favicon.ico` (or an SVG/PNG linked from `frontend/index.html`) so the request succeeds.
+1. **Fix missing favicon.** Best Practices records a console error because the browser requests `/favicon.ico` and gets 404. Add `frontend/public/favicon.ico` (or link an SVG/PNG from `frontend/index.html`) so the request succeeds. This removes the console 404 and fixes the Best Practices audit.
+2. **Fix header link contrast.** Accessibility is 94 because the "Calls Calendar" header link uses the global `a` color (`--brand-500` / `#0ea5e9`) on `.app-header-strong` (`--brand-600` / `#0284c7`). Contrast is 1.47:1; Lighthouse requires 4.5:1. Make the header brand link white (or another color that meets 4.5:1 on the header).
 3. **Add a meta description.** SEO is 90 solely because `frontend/index.html` has no `<meta name="description">`. A one-sentence summary of Calls Calendar is enough.
+4. **(Lower priority) Eliminate render-blocking CSS.** The stylesheet at `/assets/index-*.css` (~4 KiB) is flagged as render-blocking. Since Performance is already 100, consider inlining critical CSS, using preload, or deferring non-critical styles only if the team wants this tidy-up.
 
 ## Skip for now
 
