@@ -24,3 +24,6 @@ The team reviews the morning report and decides which of these to apply.
 - Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Performance is already 100.
 - First Contentful Paint and Max Potential FID are 99/98. Not worth a change.
 - Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
+ - Render-blocking CSS on `/assets/index-*.css` (example: `/assets/index-BDgfnwIW.css`, ~4 KiB, ~160 ms). Performance is already 100 so this is low priority.
+ - Max Potential First Input Delay shows a potential long task (69). Investigate long tasks if interactive responsiveness becomes a priority.
+ - Back/forward cache. Lighthouse marked the failure as not actionable (internal error on the CI static server).
