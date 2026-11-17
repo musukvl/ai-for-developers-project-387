@@ -19,6 +19,7 @@ The team reviews the morning report and decides which of these to apply.
 2. **Add a favicon.** Best Practices drops because the browser requests `/favicon.ico` and gets 404, which Lighthouse records as a console error. Add `frontend/public/favicon.ico` (or an SVG/PNG linked from `frontend/index.html`) so the request succeeds.
 3. **Add a meta description.** SEO is 90 solely because `frontend/index.html` has no `<meta name="description">`. A one-sentence summary of Calls Calendar is enough.
 
+4. **Consider addressing render-blocking CSS.** Lighthouse flagged a small stylesheet as render-blocking (`/assets/index-*.css`). The file is small (~4 KiB) and Performance is already 100, so this is a low priority. If the team wants to remove the audit, options include inlining critical CSS, using `rel=preload` for the stylesheet with `as="style"` and an `onload` swap, or splitting and deferring non-critical rules.
 ## Skip for now
 
 - Render-blocking CSS on `/assets/index-*.css` (~4 KiB, ~160 ms). Performance is already 100.
