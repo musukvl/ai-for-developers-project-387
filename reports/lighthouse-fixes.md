@@ -4,7 +4,7 @@ Baseline from a Lighthouse CI run of the built SPA (`frontend/dist`) on 2026-08-
 
 | Category | Score |
 | --- | --- |
-| Performance | 100 |
+| Performance | 98 |
 | Accessibility | 94 |
 | Best Practices | 96 |
 | SEO | 90 |
